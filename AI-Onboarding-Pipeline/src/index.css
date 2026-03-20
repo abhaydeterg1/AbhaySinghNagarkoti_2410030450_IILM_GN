@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up { animation: fadeInUp 0.6s ease-out both; }
+  .delay-0 { animation-delay: 0ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+
+  @keyframes videoBlurFadeOut {
+    from { filter: blur(6px); }
+    to { filter: blur(0px); }
+  }
+  .animate-video-blur-fadeout {
+    animation: videoBlurFadeOut 4s ease-out forwards;
+  }
+
+  .safe-top-6 {
+    top: max(1.5rem, env(safe-area-inset-top, 0px));
+  }
+}
+
+@layer base {
+  :root {
+    --background: 220 30% 12%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 28% 18%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 28% 18%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 210 80% 55%;
+    --primary-foreground: 210 40% 96%;
+    --primary-glow: 200 85% 65%;
+
+    --secondary: 220 25% 25%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 220 20% 22%;
+    --muted-foreground: 210 25% 70%;
+
+    --accent: 200 80% 60%;
+    --accent-foreground: 210 40% 96%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 96%;
+
+    --border: 220 25% 30%;
+    --input: 220 25% 25%;
+    --ring: 210 80% 55%;
+
+    --radius: 1rem;
+
+    --status-idle: 180 50% 45%;
+    --status-connected: 142 71% 45%;
+    --status-connecting: 217 91% 60%;
+    --status-warning: 38 92% 50%;
+    --status-error: 0 84% 60%;
+
+    --sidebar-background: 220 30% 10%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 210 80% 55%;
+    --sidebar-primary-foreground: 210 40% 96%;
+    --sidebar-accent: 220 25% 25%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 25% 30%;
+    --sidebar-ring: 210 80% 55%;
+
+    --gradient-bg-center: 220 30% 15%;
+    --gradient-bg-edge: 220 30% 10%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground font-inter;
+    background: radial-gradient(
+      ellipse at center,
+      hsl(var(--gradient-bg-center)),
+      hsl(var(--gradient-bg-edge))
+    );
+    min-height: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+}
