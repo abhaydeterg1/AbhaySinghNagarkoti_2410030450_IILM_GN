@@ -1,0 +1,82 @@
+{
+  "data": [
+    {
+      "objective_name": "collect_identity",
+      "objective_prompt": "Collect the client's identity. Ask one at a time:\n1. \"What's your full name?\"\n2. \"What should we call you day to day?\" — skip if they already used a short name\n3. \"What's the name of your business or brand?\"\n4. \"What's your role — founder, CEO, something else?\"",
+      "confirmation_mode": "auto",
+      "output_variables": ["full_name", "preferred_name", "business_name", "role"],
+      "modality": "verbal",
+      "next_required_objective": "collect_business_context"
+    },
+    {
+      "objective_name": "collect_business_context",
+      "objective_prompt": "Collect business context. Ask one at a time:\n1. \"What industry or niche are you in?\"\n2. \"Where's your business at — just starting out, growing, or well established?\"\n3. \"How long have you been running it?\" — approximate is fine\n4. \"Where are you based?\" — city and country is enough",
+      "confirmation_mode": "auto",
+      "output_variables": ["industry", "business_stage", "years_running", "location"],
+      "modality": "verbal",
+      "next_required_objective": "collect_current_situation"
+    },
+    {
+      "objective_name": "collect_current_situation",
+      "objective_prompt": "Understand current challenges. Ask one at a time:\n1. \"What's the biggest challenge you're facing right now?\" — if vague, ask one follow-up then move on\n2. \"Have you worked with any agencies or tried solving this on your own before?\"\n3. \"What worked and what didn't?\" — ONLY if they said yes to #2, otherwise skip entirely",
+      "confirmation_mode": "auto",
+      "output_variables": ["biggest_challenge", "previous_agency_experience", "what_worked"],
+      "modality": "verbal",
+      "next_conditional_objectives": {
+        "custom_smma": "If the client's business involves performance marketing, paid advertising, social media marketing, digital marketing agency, or SMMA",
+        "custom_recruitment": "If the client's business involves recruitment, staffing, hiring, headhunting, or talent acquisition",
+        "collect_goals": "If the client's business does not match performance marketing, SMMA, or recruitment categories"
+      }
+    },
+    {
+      "objective_name": "custom_smma",
+      "objective_prompt": "Performance marketing / SMMA client. Ask one at a time:\n1. \"Roughly how much are you spending on ads each month?\" — approximate is fine\n2. \"Which platforms are you running ads on?\"\n3. \"Do you already have ad creatives, or will you need help with that?\" — only if it fits naturally",
+      "confirmation_mode": "auto",
+      "output_variables": ["monthly_ad_spend", "ad_platforms", "creative_needs"],
+      "modality": "verbal",
+      "next_required_objective": "collect_goals"
+    },
+    {
+      "objective_name": "custom_recruitment",
+      "objective_prompt": "Recruitment client. Ask one at a time:\n1. \"How many roles are you looking to fill?\"\n2. \"What kinds of roles — technical, sales, operations, or a mix?\"\n3. \"How urgent is the hiring?\" — only if it fits naturally",
+      "confirmation_mode": "auto",
+      "output_variables": ["roles_to_fill", "role_types", "hiring_urgency"],
+      "modality": "verbal",
+      "next_required_objective": "collect_goals"
+    },
+    {
+      "objective_name": "collect_goals",
+      "objective_prompt": "Understand goals and expectations. Ask one at a time:\n1. \"What's the number one thing you're hoping to achieve with us?\"\n2. \"If everything goes perfectly over the next few months, what does that look like?\"\n3. \"Quick wins or more of a long-term play?\"",
+      "confirmation_mode": "auto",
+      "output_variables": ["primary_goal", "ideal_outcome", "timeline_preference"],
+      "modality": "verbal",
+      "next_conditional_objectives": {
+        "custom_general": "If the client's agency type is general, or their industry does not clearly match performance marketing, SMMA, or recruitment",
+        "collect_audience": "If the client's agency type clearly matches a specific category (performance marketing, SMMA, or recruitment) — they already answered industry-specific questions"
+      }
+    },
+    {
+      "objective_name": "custom_general",
+      "objective_prompt": "General client — ask:\n\"Which of our services are you most interested in starting with?\"",
+      "confirmation_mode": "auto",
+      "output_variables": ["interested_services"],
+      "modality": "verbal",
+      "next_required_objective": "collect_audience"
+    },
+    {
+      "objective_name": "collect_audience",
+      "objective_prompt": "Learn about their target audience. Ask one at a time:\n1. \"Describe your perfect customer or client.\" — if they struggle: \"Think about your best client ever — what made them a great fit?\"\n2. \"Where do most of your customers come from — word of mouth, social media, ads, something else?\"",
+      "confirmation_mode": "auto",
+      "output_variables": ["ideal_customer", "customer_acquisition_channels"],
+      "modality": "verbal",
+      "next_required_objective": "closing"
+    },
+    {
+      "objective_name": "closing",
+      "objective_prompt": "Wrap up the session.\n1. \"Any quick questions before we wrap up?\"\n2. If they ask something, redirect to their account manager in one sentence. Deliver the closing immediately — do not invite further questions.\n3. If they say no, go straight to closing.\n4. Closing: \"That's everything from my side. Welcome on board — we're really excited to work with you!\"\n5. After you finish delivering the closing message, call the end_session tool.",
+      "confirmation_mode": "auto",
+      "output_variables": ["closing_questions"],
+      "modality": "verbal"
+    }
+  ]
+}
