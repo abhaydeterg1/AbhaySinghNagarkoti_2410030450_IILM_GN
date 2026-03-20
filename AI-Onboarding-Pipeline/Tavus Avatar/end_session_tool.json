@@ -1,0 +1,10 @@
+{
+  "name": "end_session",
+  "description": "End the onboarding session and disconnect the video call. Call this ONLY after you have fully delivered the closing message and finished speaking. Do not call while still speaking.",
+  "parameters": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false,
+    "required": []
+  }
+}
