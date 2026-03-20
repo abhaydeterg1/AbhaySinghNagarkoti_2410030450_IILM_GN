@@ -1,0 +1,19 @@
+# Dev-only docs and governance (not needed at runtime or build time)
+docs/
+CLAUDE.md
+README.md
+.env.example
+
+# Tool/plugin artifacts
+.firecrawl/
+
+# Linting and testing configs (not used by build or server)
+eslint.config.js
+vitest.config.ts
+components.json
+
+# Test files (not used by build or server)
+src/__tests__/
+src/components/__tests__/
+src/hooks/__tests__/
+src/test/
